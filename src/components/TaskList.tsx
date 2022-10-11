@@ -2,6 +2,7 @@ import { useState } from 'react';
 
 import '../styles/tasklist.scss';
 
+import toast from 'react-hot-toast';
 import { FiCheckSquare, FiTrash } from 'react-icons/fi';
 
 interface Task {
@@ -23,15 +24,14 @@ export function TaskList() {
     const newTaskTitleEmpty = !newTaskTitle
     
     if(newTaskTitleEmpty) {
-      alert('Adcione um título a tarefa!')
+      toast.error('Adcione um título a tarefa!', { icon: '❗' });
       return
     }
 
     const repeatedTask = tasks.filter(({title}: Task) => title === newTaskTitle)
 
     if(repeatedTask.length) {
-      
-      alert('Existe uma tarefa criada com esse título!')
+      toast.error('Existe uma tarefa com esse título!', { icon: '❗' });
       return
     }
 
@@ -42,6 +42,8 @@ export function TaskList() {
         isComplete: false
       }
     ])
+
+    toast.success('Tarefa criada');
 
     setNewTaskTitle('')
   }
@@ -58,8 +60,6 @@ export function TaskList() {
       }
     })
 
-    console.log(tasks)
-
     setTasks([
       ...tasks
     ])
@@ -72,6 +72,8 @@ export function TaskList() {
     setTasks([
       ...newTasks
     ])
+
+    toast.success('Tarefa deletada');
   }
   
 
@@ -119,5 +121,6 @@ export function TaskList() {
         </ul>
       </main>
     </section>
+    
   )
 }
