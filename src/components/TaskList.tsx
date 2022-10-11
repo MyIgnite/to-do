@@ -23,14 +23,15 @@ export function TaskList() {
     const newTaskTitleEmpty = !newTaskTitle
     
     if(newTaskTitleEmpty) {
-      console.log('Adcione um título a tarefa!')
+      alert('Adcione um título a tarefa!')
       return
     }
 
     const repeatedTask = tasks.filter(({title}: Task) => title === newTaskTitle)
 
     if(repeatedTask.length) {
-      console.log('Existe uma tarefa criada com esse título!')
+      
+      alert('Existe uma tarefa criada com esse título!')
       return
     }
 
